@@ -1,0 +1,32 @@
+# scipy packages
+# https://github.com/jupyter/docker-stacks/blob/master/scipy-notebook/Dockerfile
+# Kubeflow pipelines - kfp, kfp-server-api, kfserving
+altair==4.2.0
+beautifulsoup4==4.11.1
+bokeh==2.4.2
+Bottleneck==1.3.4
+cloudpickle==2.0.0
+Cython==0.29.28
+dask==2022.4.1
+dill==0.3.4
+h5py==3.6.0
+ipympl==0.9.1
+ipywidgets==7.7.0
+kfp==1.8.12
+kfp-server-api==1.8.1
+kfserving==0.6.1
+matplotlib==3.5.1
+numba==0.55.1
+numexpr==2.8.1
+pandas==1.4.2
+patsy==0.5.2
+protobuf==3.20.1
+scikit-image==0.19.2
+scikit-learn==1.0.2
+scipy==1.8.0
+seaborn==0.11.2
+SQLAlchemy==1.4.36
+statsmodels==0.13.2
+sympy==1.10.1
+widgetsnbextension==3.6.0
+xlrd==2.0.1
