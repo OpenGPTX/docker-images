@@ -57,7 +57,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./notebook-servers/${{ matrix.stage2 }}
-          build-args: ["GCR=ghcr.io/OpenGPTX"]
+          build-args: GCR=ghcr.io/OpenGPTX
           push: true
           tags: |
             ghcr.io/OpenGPTX/notebook-servers/${{ matrix.stage2 }}:${{ github.run_id }}
