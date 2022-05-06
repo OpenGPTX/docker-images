@@ -1,5 +1,5 @@
 ARG GCR
-FROM $GCR/notebook-servers/jupyter-spark:latest
+FROM $GCR/notebook-servers/jupyter:latest
 
 COPY --chown=jovyan:users requirements.txt /tmp/requirements.txt
 RUN : \
