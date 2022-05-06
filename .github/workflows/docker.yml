@@ -49,16 +49,16 @@ jobs:
           context: ./notebook-servers/${{ matrix.stage1 }}
           push: true
           tags: |
-            ghcr.io/OpenGPTX/notebook-servers/${{ matrix.stage1 }}:${{ github.run_id }}
-            ghcr.io/OpenGPTX/notebook-servers/${{ matrix.stage1 }}:latest
+            ghcr.io/opengptx/notebook-servers/${{ matrix.stage1 }}:${{ github.run_id }}
+            ghcr.io/opengptx/notebook-servers/${{ matrix.stage1 }}:latest
 
       - name: Build and push Stage 2
         id: build_stage2
         uses: docker/build-push-action@v3
         with:
           context: ./notebook-servers/${{ matrix.stage2 }}
-          build-args: GCR=ghcr.io/OpenGPTX
+          build-args: GCR=ghcr.io/opengptx
           push: true
           tags: |
-            ghcr.io/OpenGPTX/notebook-servers/${{ matrix.stage2 }}:${{ github.run_id }}
-            ghcr.io/OpenGPTX/notebook-servers/${{ matrix.stage2 }}:latest
+            ghcr.io/opengptx/notebook-servers/${{ matrix.stage2 }}:${{ github.run_id }}
+            ghcr.io/opengptx/notebook-servers/${{ matrix.stage2 }}:latest
