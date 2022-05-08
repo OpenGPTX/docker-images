@@ -1,4 +1,4 @@
-name: Build Docker Images
+name: Build Notebook IDE images
 
 on:
   pull_request:
@@ -8,83 +8,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-images:
-    name: Build Docker Images
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        stage1: ["jupyter"]
-        stage2: ["jupyter-scipy", "jupyter-pytorch"]
-    permissions:
-      contents: read
-      packages: write
+  build_stage1:
+    uses: ./.github/workflows/docker_build_template.yml
+    with:
+      # Workaround until matrix strategy is supported in reusable workflows
+      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
+      docker_img_names: >-
+        ["jupyter"]
 
-    steps:
-      - name: Maximize build space
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-
-      - name: Set up QEMU (for docker buildx
-        uses: docker/setup-qemu-action@v2
-
-      - name: Set up Docker Buildx (for multi-arch builds)
-        uses: docker/setup-buildx-action@v2
-
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - name: Log in to the Container registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Docker metadata Stage 1
-        id: meta_stage1
-        uses: docker/metadata-action@v4
-        with:
-          images: |
-            ghcr.io/opengptx/notebook-servers/${{ matrix.stage1 }}
-          tags: |
-            type=raw,value=latest
-            type=raw,value=${{ github.run_id }}
-            type=ref,event=branch
-            type=ref,event=tag
-            type=ref,event=pr
-            type=sha
-
-      - name: Build and push Stage 1
-        id: build_stage1
-        uses: docker/build-push-action@v3
-        with:
-          context: ./notebook-servers/${{ matrix.stage1 }}
-          push: true
-          tags: ${{ steps.meta_stage1.outputs.tags }}
-          labels: ${{ steps.meta_stage1.outputs.labels }}
-
-      - name: Docker metadata Stage 2
-        id: meta_stage2
-        uses: docker/metadata-action@v4
-        with:
-          images: |
-            ghcr.io/opengptx/notebook-servers/${{ matrix.stage2 }}
-          tags: |
-            type=raw,value=latest
-            type=raw,value=${{ github.run_id }}
-            type=ref,event=branch
-            type=ref,event=tag
-            type=ref,event=pr
-            type=sha
-
-      - name: Build and push Stage 2
-        id: build_stage2
-        uses: docker/build-push-action@v3
-        with:
-          context: ./notebook-servers/${{ matrix.stage2 }}
-          build-args: GCR=ghcr.io/opengptx
-          push: true
-          tags: ${{ steps.meta_stage2.outputs.tags }}
-          labels: ${{ steps.meta_stage2.outputs.labels }}
+  build_stage2:
+    needs: [build_stage1]
+    uses: ./.github/workflows/docker_build_template.yml
+    with:
+      docker_img_names: >-
+        ["jupyter-scipy", "jupyter-pytorch"]
+      build_args: GCR=ghcr.io/opengptx
