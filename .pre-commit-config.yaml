@@ -20,7 +20,8 @@ repos:
     hooks:
       - id: hadolint-docker
         # ignore "using latest" warning
-        entry: hadolint/hadolint:v2.10.0 hadolint --ignore DL3007
+        # ignore "package==<version>" warning
+        entry: hadolint/hadolint:v2.10.0 hadolint --ignore DL3007 --ignore DL3008
 
   # Lint: YAML
   - repo: https://github.com/adrienverge/yamllint.git

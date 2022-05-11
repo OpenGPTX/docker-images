@@ -14,7 +14,7 @@ jobs:
       # Workaround until matrix strategy is supported in reusable workflows
       # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
       path_to_dockerfile: >-
-        ["notebook-servers/jupyter"]
+        ["notebook-servers/base", "notebook-servers/jupyter"]
 
   build_stage2:
     needs: [build_stage1]
