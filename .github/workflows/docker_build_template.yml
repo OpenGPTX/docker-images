@@ -3,8 +3,9 @@ name: Template for Notebook IDE images build
 on:
   workflow_call:
     inputs:
-      docker_img_names:
-        description: "List of folders for dockerfiles"
+      # the image pushed will have the url as ghcr.io/opengptx/{path_to_dockerfile}
+      path_to_dockerfile:
+        description: "Path to the dockerfile"
         required: true
         type: string
 
@@ -22,7 +23,7 @@ jobs:
       matrix:
         # Workaround until matrix strategy is supported in reusable workflows
         # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/2
-        docker_img_names: ${{fromJson(inputs.docker_img_names)}}
+        path_to_dockerfile: ${{fromJson(inputs.path_to_dockerfile)}}
     permissions:
       contents: read
       packages: write
@@ -49,7 +50,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ghcr.io/opengptx/notebook-servers/${{ matrix.docker_img_names }}
+            ghcr.io/opengptx/${{ matrix.path_to_dockerfile }}
           tags: |
             type=raw,value=latest
             type=raw,value=${{ github.run_id }}
@@ -62,7 +63,7 @@ jobs:
         id: build
         uses: docker/build-push-action@v3
         with:
-          context: ./notebook-servers/${{ matrix.docker_img_names }}
+          context: ./${{ matrix.path_to_dockerfile }}
           build-args: ${{ inputs.build_args }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}

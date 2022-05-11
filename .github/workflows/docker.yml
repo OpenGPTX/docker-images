@@ -13,13 +13,13 @@ jobs:
     with:
       # Workaround until matrix strategy is supported in reusable workflows
       # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
-      docker_img_names: >-
-        ["jupyter"]
+      path_to_dockerfile: >-
+        ["notebook-servers/jupyter"]
 
   build_stage2:
     needs: [build_stage1]
     uses: ./.github/workflows/docker_build_template.yml
     with:
-      docker_img_names: >-
-        ["jupyter-scipy", "jupyter-pytorch"]
+      path_to_dockerfile: >-
+        ["notebook-servers/jupyter-scipy", "notebook-servers/jupyter-pytorch"]
       build_args: GCR=ghcr.io/opengptx
