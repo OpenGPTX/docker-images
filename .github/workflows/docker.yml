@@ -14,14 +14,14 @@ jobs:
       # Workaround until matrix strategy is supported in reusable workflows
       # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
       path_to_dockerfile: >-
-        ["notebook-servers/base"]
+        ["notebook-servers/base", "spark/base"]
 
   stage2:
     needs: [stage1]
     uses: ./.github/workflows/docker_build_template.yml
     with:
       path_to_dockerfile: >-
-        ["notebook-servers/jupyter"]
+        ["notebook-servers/jupyter", "spark/python"]
       build_args: GCR=ghcr.io/opengptx
 
   stage3:

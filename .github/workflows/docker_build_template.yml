@@ -20,6 +20,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: true
       matrix:
         # Workaround until matrix strategy is supported in reusable workflows
         # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/2
