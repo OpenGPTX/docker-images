@@ -2,9 +2,19 @@ name: Build Notebook IDE images
 
 on:
   pull_request:
+    paths:
+      - ".github/workflows/**"
+      - "notebook-servers/**"
+      - "spark/**"
+
   push:
     branches:
       - main
+    paths:
+      - ".github/workflows/**"
+      - "notebook-servers/**"
+      - "spark/**"
+
   workflow_dispatch:
 
 jobs:
