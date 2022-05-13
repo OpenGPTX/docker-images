@@ -1,4 +1,4 @@
-name: Template for Notebook IDE images build
+name: Docker build and push Template
 
 on:
   workflow_call:
