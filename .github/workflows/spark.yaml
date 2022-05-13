@@ -1,0 +1,39 @@
+name: Build Spark Images
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/docker_build_template.yml"
+      - ".github/workflows/spark.yml"
+      - "spark/**"
+
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/docker_build_template.yml"
+      - ".github/workflows/spark.yml"
+      - "spark/**"
+
+  workflow_dispatch:
+
+  workflow_run:
+    workflows: [Run pre-commit hooks]
+    types: [completed]
+
+jobs:
+  stage1:
+    uses: ./.github/workflows/docker_build_template.yml
+    with:
+      # Workaround until matrix strategy is supported in reusable workflows
+      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
+      path_to_dockerfile: >-
+        ["spark/base"]
+
+  stage2:
+    needs: [stage1]
+    uses: ./.github/workflows/docker_build_template.yml
+    with:
+      path_to_dockerfile: >-
+        ["spark/python"]
+      build_args: GCR=ghcr.io/opengptx

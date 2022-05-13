@@ -1,0 +1,21 @@
+#!/usr/bin/with-contenv bash
+cp -r -n /tmp_home/* /home/
+
+
+# Automatically clone training repository on notebook start
+# TODO: move to separate file
+
+git config --global user.email "$NB_MY_NAMESPACE@email.com"
+git config --global user.name "$NB_MY_NAMESPACE-$NB_PROJECT_NAME"
+
+if [ -n "$TRAINING_REPO_TOKEN_READ_ONLY" ]
+then
+  echo "Using read-only token"
+  GIT_SSL_NO_VERIFY=1 git clone https://token:$TRAINING_REPO_TOKEN_READ_ONLY@$TRAINING_REPO_PATH
+fi
+
+if [ -n "$TRAINING_REPO_TOKEN_READ_WRITE" ]
+then
+  echo "Using read/write token"
+  GIT_SSL_NO_VERIFY=1 git clone https://token:$TRAINING_REPO_TOKEN_READ_WRITE@$TRAINING_REPO_PATH
+fi
