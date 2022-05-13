@@ -3,19 +3,23 @@ name: Build Notebook IDE images
 on:
   pull_request:
     paths:
-      - ".github/workflows/**"
+      - ".github/workflows/docker_build_template.yml"
+      - ".github/workflows/notebook_ide.yml"
       - "notebook-servers/**"
-      - "spark/**"
 
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/**"
+      - ".github/workflows/docker_build_template.yml"
+      - ".github/workflows/notebook_ide.yml"
       - "notebook-servers/**"
-      - "spark/**"
 
   workflow_dispatch:
+
+  workflow_run:
+    workflows: [Run pre-commit hooks]
+    types: [completed]
 
 jobs:
   stage1:
@@ -24,14 +28,14 @@ jobs:
       # Workaround until matrix strategy is supported in reusable workflows
       # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
       path_to_dockerfile: >-
-        ["notebook-servers/base", "spark/base"]
+        ["notebook-servers/base"]
 
   stage2:
     needs: [stage1]
     uses: ./.github/workflows/docker_build_template.yml
     with:
       path_to_dockerfile: >-
-        ["notebook-servers/jupyter", "spark/python"]
+        ["notebook-servers/jupyter"]
       build_args: GCR=ghcr.io/opengptx
 
   stage3:
