@@ -31,3 +31,11 @@ jobs:
       # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
       path_to_dockerfile: >-
         ["notebook-servers/codeserver"]
+
+  stage2:
+    needs: [stage1]
+    uses: ./.github/workflows/docker_build_template.yml
+    with:
+      path_to_dockerfile: >-
+        ["notebook-servers/codeserver-python"]
+      build_args: GCR=ghcr.io/opengptx
