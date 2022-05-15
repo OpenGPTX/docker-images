@@ -1,4 +1,4 @@
-name: Build Notebook IDE images
+name: Build Jupyter IDE images
 
 on:
   pull_request:
