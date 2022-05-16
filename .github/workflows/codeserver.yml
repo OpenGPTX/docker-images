@@ -39,3 +39,11 @@ jobs:
       path_to_dockerfile: >-
         ["notebook-servers/codeserver-python"]
       build_args: GCR=ghcr.io/opengptx
+
+  stage3:
+    needs: [stage1, stage2]
+    uses: ./.github/workflows/docker_build_template.yml
+    with:
+      path_to_dockerfile: >-
+        ["notebook-servers/codeserver-spark"]
+      build_args: GCR=ghcr.io/opengptx
