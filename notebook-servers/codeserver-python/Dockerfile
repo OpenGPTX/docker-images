@@ -62,7 +62,8 @@ RUN : \
   && :
 
 # install - codeserver extensions
-RUN code-server --install-extension "ms-python.python@${CODESERVER_PYTHON_VERSION}"
+# install latest version available for codeserver
+RUN code-server --install-extension "ms-python.python"
 
 # s6 - copy scripts
 COPY --chown=jovyan:users s6/ /etc

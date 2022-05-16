@@ -46,5 +46,5 @@ jobs:
     uses: ./.github/workflows/docker_build_template.yml
     with:
       path_to_dockerfile: >-
-        ["notebook-servers/codeserver-spark"]
+        ["notebook-servers/codeserver-python-spark"]
       build_args: GCR=ghcr.io/opengptx
