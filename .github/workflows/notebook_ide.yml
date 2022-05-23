@@ -47,5 +47,9 @@ jobs:
     uses: ./.github/workflows/docker_build_template.yml
     with:
       path_to_dockerfile: >-
-        ["notebook-servers/jupyter-spark-scipy", "notebook-servers/jupyter-spark-pytorch"]
+        [
+          "notebook-servers/jupyter-spark-scipy",
+          "notebook-servers/jupyter-spark-pytorch",
+          "notebook-servers/jupyter-spark-pytorch-cuda",
+        ]
       build_args: GCR=ghcr.io/opengptx
