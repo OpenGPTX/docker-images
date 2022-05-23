@@ -17,10 +17,6 @@ on:
 
   workflow_dispatch:
 
-  workflow_run:
-    workflows: [Run pre-commit hooks]
-    types: [completed]
-
 jobs:
   stage1:
     uses: ./.github/workflows/docker_build_template.yml

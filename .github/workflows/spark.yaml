@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - ".github/workflows/docker_build_template.yml"
-      - ".github/workflows/spark.yml"
+      - ".github/workflows/spark.yaml"
       - "spark/**"
 
   push:
@@ -12,14 +12,10 @@ on:
       - main
     paths:
       - ".github/workflows/docker_build_template.yml"
-      - ".github/workflows/spark.yml"
+      - ".github/workflows/spark.yaml"
       - "spark/**"
 
   workflow_dispatch:
-
-  workflow_run:
-    workflows: [Run pre-commit hooks]
-    types: [completed]
 
 jobs:
   stage1:
