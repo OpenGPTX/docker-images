@@ -1,5 +1,9 @@
 # Docker Images
 
+[![Run pre-commit hooks](https://github.com/OpenGPTX/docker-images/actions/workflows/pre-commit.yaml/badge.svg?branch=main)](https://github.com/OpenGPTX/docker-images/actions/workflows/pre-commit.yaml)
+[![Build Jupyter IDE images](https://github.com/OpenGPTX/docker-images/actions/workflows/notebook_ide.yml/badge.svg?branch=main)](https://github.com/OpenGPTX/docker-images/actions/workflows/notebook_ide.yml)
+[![Build Spark Images](https://github.com/OpenGPTX/docker-images/actions/workflows/spark.yaml/badge.svg?branch=main)](https://github.com/OpenGPTX/docker-images/actions/workflows/spark.yaml)
+
 The repository contains Notebook IDE images and Spark Kubernetes images.
 
 All the images are public and can be refereced via:
@@ -19,7 +23,7 @@ provided by Kubeflow.
 ### Images // Relationship Chart
 
 The chart shows how the images are related to each other.
-![DockerImages](https://user-images.githubusercontent.com/97906975/168025140-2a7188c5-0d03-40e3-80e5-16e21a0ba9bf.png)
+![DockerImages](https://user-images.githubusercontent.com/97906975/169824391-494553f0-e3ec-4caa-8332-70f41a6732fd.png)
 
 ### Images // Important Information
 
