@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+# to make NAMESPACE & NOTEBOOK_NAME available inside the python kernel
+KERNEL_SPEC_FILE="/opt/conda/share/jupyter/kernels/python3/kernel.json"
+NAMESPACE=$(echo $NB_PREFIX | awk -F '/' '{print $3}')
+NOTEBOOK_NAME=$(echo $NB_PREFIX | awk -F '/' '{print $4}')
+
+env_dict=$(jq -n --arg NAMESPACE "$NAMESPACE" --arg NOTEBOOK_NAME "$NOTEBOOK_NAME" '$ARGS.named')
+jq --argjson env "$env_dict" '. + {"env" : $env }' $KERNEL_SPEC_FILE > tmp.json && mv tmp.json $KERNEL_SPEC_FILE

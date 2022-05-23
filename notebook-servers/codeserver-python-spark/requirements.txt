@@ -1,0 +1,7 @@
+boto3==1.22.3
+conda-pack==0.6.0
+delta-spark==1.2.0
+pandas==1.4.2
+pyarrow==7.0.0
+pyspark==3.2.1
+sparkmonitor==2.1.1

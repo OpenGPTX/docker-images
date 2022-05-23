@@ -1,19 +1,21 @@
-name: Build Jupyter IDE images
+name: Build Codeserver IDE images
 
 on:
   pull_request:
     paths:
       - ".github/workflows/docker_build_template.yml"
-      - ".github/workflows/notebook_ide.yml"
-      - "notebook-servers/**"
+      - ".github/workflows/codeserver.yml"
+      - "notebook-servers/base/**"
+      - "notebook-servers/codeserver*/**"
 
   push:
     branches:
       - main
     paths:
       - ".github/workflows/docker_build_template.yml"
-      - ".github/workflows/notebook_ide.yml"
-      - "notebook-servers/**"
+      - ".github/workflows/codeserver.yml"
+      - "notebook-servers/base/**"
+      - "notebook-servers/codeserver*/**"
 
   workflow_dispatch:
 
@@ -24,14 +26,15 @@ jobs:
       # Workaround until matrix strategy is supported in reusable workflows
       # https://github.community/t/reusable-workflow-with-strategy-matrix/205676/8
       path_to_dockerfile: >-
-        ["notebook-servers/base"]
+        ["notebook-servers/codeserver"]
+      build_args: GCR=ghcr.io/opengptx
 
   stage2:
     needs: [stage1]
     uses: ./.github/workflows/docker_build_template.yml
     with:
       path_to_dockerfile: >-
-        ["notebook-servers/jupyter"]
+        ["notebook-servers/codeserver-python"]
       build_args: GCR=ghcr.io/opengptx
 
   stage3:
@@ -39,13 +42,5 @@ jobs:
     uses: ./.github/workflows/docker_build_template.yml
     with:
       path_to_dockerfile: >-
-        ["notebook-servers/jupyter-spark"]
-      build_args: GCR=ghcr.io/opengptx
-
-  stage4:
-    needs: [stage1, stage2, stage3]
-    uses: ./.github/workflows/docker_build_template.yml
-    with:
-      path_to_dockerfile: >-
-        ["notebook-servers/jupyter-spark-scipy", "notebook-servers/jupyter-spark-pytorch"]
+        ["notebook-servers/codeserver-python-spark"]
       build_args: GCR=ghcr.io/opengptx
