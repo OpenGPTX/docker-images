@@ -1,8 +1,6 @@
 import os
-from delta import configure_spark_with_delta_pip
 import pyspark
-import pyspark.sql.functions as F
-
+from delta import configure_spark_with_delta_pip
 
 # add the maven packages you want to use
 maven_packages = [
@@ -11,7 +9,6 @@ maven_packages = [
 ]
 maven_packages = ",".join(maven_packages)
 
-os.environ["JAVA_HOME"] = "/usr/lib/jvm/default-java"
 os.environ["PYSPARK_SUBMIT_ARGS"] = f'--packages "{maven_packages}" pyspark-shell'
 
 builder = (
@@ -27,10 +24,8 @@ builder = (
         "com.amazonaws.auth.WebIdentityTokenCredentialsProvider",
     )
 )
+
 spark = configure_spark_with_delta_pip(builder).getOrCreate()
 
-df = spark.read.parquet("s3a://opengptx/examples/kfp/numbers")
-df = df.withColumn("num_squared", F.pow("num", 2))
-df.write.format("parquet").mode("overwrite").save(
-    "s3a://opengptx/examples/kfp/numbers_squared"
-)
+df = spark.range(5).withColumnRenamed("id", "num")
+df.write.format("parquet").mode("overwrite").save("s3a://opengptx/examples/kfp/numbers")
