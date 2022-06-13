@@ -104,3 +104,6 @@ USER ${spark_uid}
 
 # Install delta-spark as non-root
 RUN pip install delta-spark==${DELTA_LAKE_VERSION}  --no-cache-dir -t /opt/spark/python/
+
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt --no-cache-dir -t /opt/spark/python/
