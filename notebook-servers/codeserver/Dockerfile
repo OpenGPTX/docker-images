@@ -3,7 +3,7 @@ FROM $GCR/notebook-servers/base:latest
 USER root
 
 # args - software versions
-ARG CODESERVER_VERSION=v4.4.0
+ARG CODESERVER_VERSION=v4.5.1
 
 # set shell to bash
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

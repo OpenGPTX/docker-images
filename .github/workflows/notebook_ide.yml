@@ -6,6 +6,9 @@ on:
       - ".github/workflows/docker_build_template.yml"
       - ".github/workflows/notebook_ide.yml"
       - "notebook-servers/**"
+      - "!notebook-servers/codeserver/**"
+      - "!notebook-servers/codeserver-python/**"
+      - "!notebook-servers/codeserver-python-spark/**"
 
   push:
     branches:
@@ -14,6 +17,9 @@ on:
       - ".github/workflows/docker_build_template.yml"
       - ".github/workflows/notebook_ide.yml"
       - "notebook-servers/**"
+      - "!notebook-servers/codeserver/**"
+      - "!notebook-servers/codeserver-python/**"
+      - "!notebook-servers/codeserver-python-spark/**"
 
   workflow_dispatch:
 

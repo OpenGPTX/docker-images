@@ -24,8 +24,6 @@ ENV PATH "${CONDA_DIR}/bin:${PATH}"
 RUN : \
   && mkdir -p "${CONDA_DIR}" \
   && chown -R "${NB_USER}:users" "${CONDA_DIR}" \
-  && echo "NAMESPACE=\$(echo \$NB_PREFIX | awk -F '/' '{print \$3}')" >> /etc/profile \
-  && echo "NOTEBOOK_NAME=\$(echo \$NB_PREFIX | awk -F '/' '{print \$4}')" >> /etc/profile \
   && :
 
 USER $NB_UID
