@@ -1,4 +1,4 @@
 pandas==1.4.2
 pyarrow==7.0.0
 pyspark==3.2.1
-spark-nlp==3.4.3
+spark-nlp==4.0.2
