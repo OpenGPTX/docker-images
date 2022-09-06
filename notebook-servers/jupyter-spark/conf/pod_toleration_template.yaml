@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+spec:
+  tolerations:
+    - key: "kubesoup.com/tier"
+      operator: "Equal"
+      value: "spark-dedicated"
+      effect: "NoSchedule"
