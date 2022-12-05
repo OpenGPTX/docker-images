@@ -6,7 +6,7 @@ ARG spark_uid=185
 ARG SPARK_VERSION=3.2.1
 ARG HADOOP_VERSION=3.2
 ARG DELTA_LAKE_VERSION=1.2.0
-ARG SPARKNLP_VERSION=4.2.4
+ARG SPARKNLP_VERSION=4.0.2
 ENV SPARK_HOME /opt/spark
 
 # set shell to bash
@@ -45,7 +45,7 @@ RUN : \
   && curl -sL "https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.1/hadoop-aws-3.3.1.jar" -o /opt/spark/jars/hadoop-aws-3.3.1.jar \
   && curl -sL "https://repo1.maven.org/maven2/io/delta/delta-core_2.12/${DELTA_LAKE_VERSION}/delta-core_2.12-${DELTA_LAKE_VERSION}.jar" -o /opt/spark/jars/delta-core_2.12-${DELTA_LAKE_VERSION}.jar \
   && curl -sL "https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.901/aws-java-sdk-bundle-1.11.901.jar" -o /opt/spark/jars/aws-java-sdk-bundle-1.11.901.jar \
-  && curl -sL "https://repo1.maven.org/maven2/com/johnsnowlabs/nlp/spark-nlp_2.12/${SPARKNLP_VERSION}/spark-nlp_2.12-${SPARKNLP_VERSION}.jar" -o /opt/spark/jars/spark-nlp_2.12-${SPARKNLP_VERSION}.jar \
+  && curl -sL "https://s3.amazonaws.com/auxdata.johnsnowlabs.com/public/jars/spark-nlp-assembly-${SPARKNLP_VERSION}.jar" -o /opt/spark/jars/spark-nlp_2.12-${SPARKNLP_VERSION}.jar \
   && :
 
 WORKDIR /opt/spark/work-dir
