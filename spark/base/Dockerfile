@@ -46,6 +46,8 @@ RUN : \
   && curl -sL "https://repo1.maven.org/maven2/io/delta/delta-core_2.12/${DELTA_LAKE_VERSION}/delta-core_2.12-${DELTA_LAKE_VERSION}.jar" -o /opt/spark/jars/delta-core_2.12-${DELTA_LAKE_VERSION}.jar \
   && curl -sL "https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.901/aws-java-sdk-bundle-1.11.901.jar" -o /opt/spark/jars/aws-java-sdk-bundle-1.11.901.jar \
   && curl -sL "https://s3.amazonaws.com/auxdata.johnsnowlabs.com/public/jars/spark-nlp-assembly-${SPARKNLP_VERSION}.jar" -o /opt/spark/jars/spark-nlp_2.12-${SPARKNLP_VERSION}.jar \
+  && curl -sL "https://repo1.maven.org/maven2/org/apache/spark/spark-hadoop-cloud_2.13/3.2.1/spark-hadoop-cloud_2.13-3.2.1.jar" -o /opt/spark/jars/spark-hadoop-cloud_2.13-3.2.1.jar \
+  && curl -sL "https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/3.2.1/hadoop-mapreduce-client-core-3.2.1.jar" -o /opt/spark/jars/hadoop-mapreduce-client-core-3.2.1.jar \
   && :
 
 WORKDIR /opt/spark/work-dir
